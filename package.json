@@ -1,0 +1,19 @@
+{
+  "name": "theory-of-colours",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreasChristianson/theory-of-colours.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndreasChristianson/theory-of-colours/issues"
+  },
+  "homepage": "https://github.com/AndreasChristianson/theory-of-colours#readme"
+}
