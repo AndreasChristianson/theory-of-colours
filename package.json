@@ -19,5 +19,14 @@
   "bugs": {
     "url": "https://github.com/AndreasChristianson/theory-of-colours/issues"
   },
-  "homepage": "https://github.com/AndreasChristianson/theory-of-colours#readme"
+  "type": "module",
+  "homepage": "https://github.com/AndreasChristianson/theory-of-colours#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "svg-builder": "^1.0.0",
+    "yargs": "^17.1.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.3.2"
+  }
 }
