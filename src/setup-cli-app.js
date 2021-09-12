@@ -12,9 +12,8 @@ log.level = {
   2: 'silly',
 }[options.verbose];
 
-log.enableProgress();
-
 if (options.silent) {
   log.level = 'error';
-  log.disableProgress();
+} else {
+  log.enableProgress();
 }
