@@ -13,11 +13,10 @@ export default async () => {
   try {
     validateOptions();
     const writeStream = await openOutputFile(options.file);
-
     const Plan = await lookupPlan(options.plan);
-    const planInstance = new Plan(options);
+    const planInstance = new Plan(options, writeStream);
     log.silly('Plan instance created');
-    await planInstance.buildSvg(writeStream);
+    await planInstance.buildSvg();
     log.verbose('SVG generation complete.');
     await closeOutputFile(writeStream);
     log.verbose('SVG written to disk.');
