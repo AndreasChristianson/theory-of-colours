@@ -1,7 +1,7 @@
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import pick from '../utilities/pick.js';
-import randomInt from '../utilities/random-int.js';
+import random from 'random';
 import plans from '../plans/index.js';
 
 const availablePlans = Object.keys(plans);
@@ -29,7 +29,7 @@ const options = yargs(hideBin(process.argv))
     type: 'number',
     description: 'Initial seed',
     defaultDescription: 'chosen randomly',
-    default: () => randomInt(),
+    default: () => random.int(0, Number.MAX_SAFE_INTEGER),
   })
   .option('plan', {
     alias: 'p',
