@@ -41,5 +41,7 @@ I don't think the shebang will work on windows
 - [ ] strokes
   - [ ] bezier curves
   - [ ] width variance
+  - [ ] directional
+- animations
   - [ ] shimmy shimmy ya
 - [ ] prosper?
