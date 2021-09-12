@@ -1,5 +1,5 @@
-import noise from './noise/noise.js';
+import Noise from './noise/Noise.js';
 
 export default {
-  noise: noise,
+  noise: Noise,
 };
