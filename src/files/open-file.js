@@ -10,9 +10,9 @@ export default async (fileName) =>
       flags: 'wx',
     });
 
-    writeStream.on('error', reject);
+    writeStream.once('error', reject);
 
-    writeStream.on('ready', () => {
+    writeStream.once('ready', () => {
       tracker.silly('File opened', fileName);
       tracker.finish();
       resolve(writeStream);
