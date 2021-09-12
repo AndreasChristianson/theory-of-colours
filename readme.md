@@ -24,9 +24,12 @@ I don't think the shebang will work on windows
   - [x] filename to write to
   - [x] open
 - SVG generation
-  - don't write elements before collecting them
-  - don't spew drain listener warnings
-
+  - [ ] don't write elements before collecting them
+- files
+  - [ ] don't spew drain listener warnings
+- reproducability
+  - [ ] make sure identical seeds yield identical svgs
+    - [ ] first AT
 
 ## Road Map
 
