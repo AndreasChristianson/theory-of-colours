@@ -23,6 +23,7 @@
   "homepage": "https://github.com/AndreasChristianson/theory-of-colours#readme",
   "dependencies": {
     "chalk": "^4.1.2",
+    "color-string": "^1.6.0",
     "npmlog": "^5.0.1",
     "open": "^8.2.1",
     "random": "^3.0.6",
