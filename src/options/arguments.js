@@ -55,6 +55,16 @@ const options = yargs(hideBin(process.argv))
     description: 'The file to write to',
     default: 'art.svg',
   })
+  .option('width', {
+    type: 'number',
+    description: "The file's width.",
+    default: 1000,
+  })
+  .option('height', {
+    type: 'number',
+    description: "The file's height.",
+    default: 1000,
+  })
   .option('silent', {
     type: 'boolean',
     description: 'Only display errors, no other logs.',
