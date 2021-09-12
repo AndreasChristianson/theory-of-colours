@@ -19,7 +19,7 @@ I don't think the shebang will work on windows
 - [ ] publish
   - [ ] auto publish main
 - [ ] cli args
-  - [ ] filename to write to
+  - [x] filename to write to
   - [ ] open it
 
 ## Road Map
