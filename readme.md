@@ -10,6 +10,8 @@ This package generates random SVGs.
 
 ## Usage
 
+`colours --help`
+
 ## Gotcha
 
 I don't think the shebang will work on windows
@@ -18,16 +20,20 @@ I don't think the shebang will work on windows
 
 - [ ] publish
   - [ ] auto publish main
-- [ ] cli args
+- [x] cli args
   - [x] filename to write to
-  - [ ] open it
+  - [x] open
+- SVG generation
+  - don't write elements before collecting them
+  - don't spew drain listener warnings
+
 
 ## Road Map
 
 - [ ] Random dots
-  - [ ] distribution
+  - [x] distribution
   - [ ] symmetry
-  - [ ] background
+  - [x] background color
   - [ ] non-overlapping
 - [ ] strokes
   - [ ] bezier curves
