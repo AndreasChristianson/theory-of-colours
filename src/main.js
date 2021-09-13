@@ -1,33 +1,37 @@
-import './setup-cli-app.js';
-import options from './options/arguments.js';
+import { setupLogging } from './setup-cli-app.js';
+import { setOptions } from './options/arguments.js';
 import log from 'npmlog';
-import validateOptions from './options/validate.js';
-import openOutputFile from './files/open-file.js';
-import closeOutputFile from './files/close-file.js';
-import lookupPlan from './plans/lookup-plan.js';
-import open from 'open';
+import { validateOptions } from './options/validate.js';
+import {
+  openFile,
+  closeFile,
+  conditionallyOpenOutputFile,
+} from './files/index.js';
+import { lookupPlan } from './plans/lookup-plan.js';
+import { setupSeed } from './random/index.js';
 
-export default async () => {
-  log.verbose('Verbose logging enabled.');
-  log.silly('Very verbose logging enabled.');
+export const main = async () => {
   try {
+    setOptions();
+    setupLogging();
+
     validateOptions();
-    const writeStream = await openOutputFile(options.file);
-    const Plan = await lookupPlan(options.plan);
-    const planInstance = new Plan(options, writeStream);
+    setupSeed();
+
+    await openFile();
+
+    const Plan = await lookupPlan();
+
+    const planInstance = new Plan();
     log.silly('Plan instance created');
+
     await planInstance.buildSvg();
     log.verbose('SVG generation complete.');
-    await closeOutputFile(writeStream);
+
+    await closeFile();
     log.verbose('SVG written to disk.');
-    if (options.open) {
-      log.silly('Opening output for viewing.');
-      await open(options.file, {
-        app: {
-          name: open.apps.chrome,
-        },
-      });
-    }
+
+    await conditionallyOpenOutputFile();
   } catch (e) {
     log.error('Error caught', e);
   }

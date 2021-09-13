@@ -1,19 +1,23 @@
 import log from 'npmlog';
-import options from './options/arguments.js';
+import { getOptions } from './options/arguments.js';
 
 process.on('unhandledRejection', (err) => {
   console.error(err instanceof Error ? err.message : err);
   process.exit(-1);
 });
 
-log.level = {
-  0: 'info',
-  1: 'verbose',
-  2: 'silly',
-}[options.verbose];
+export const setupLogging = () => {
+  log.level = {
+    0: 'info',
+    1: 'verbose',
+    2: 'silly',
+  }[getOptions().verbose];
 
-if (options.silent) {
-  log.level = 'error';
-} else {
-  log.enableProgress();
-}
+  if (getOptions().silent) {
+    log.level = 'error';
+  } else {
+    log.enableProgress();
+  }
+  log.verbose('Verbose logging enabled.');
+  log.silly('Very verbose logging enabled.');
+};

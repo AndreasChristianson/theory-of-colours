@@ -1,17 +1,16 @@
 import log from 'npmlog';
+import { getWriteStream } from '../files/index.js';
 
 export default class {
-  constructor(writeStream) {
-    this.writeStream = writeStream;
-  }
   async writeToStream(string) {
     return new Promise((resolve) => {
       log.silly('Writing element to file', string);
-      if (this.writeStream.write(string)) {
+      if (getWriteStream().write(string)) {
         resolve();
+        return;
       }
       log.silly('fs buffer full. Pausing for drain event.');
-      this.writeStream.once('drain', resolve);
+      getWriteStream().once('drain', resolve);
     });
   }
 

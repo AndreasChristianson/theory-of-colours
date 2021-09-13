@@ -26,10 +26,16 @@ I don't think the shebang will work on windows
 - SVG generation
   - [ ] don't write elements before collecting them
 - files
-  - [ ] don't spew drain listener warnings
+  - [x] don't spew drain listener warnings
 - reproducability
   - [ ] make sure identical seeds yield identical svgs
     - [ ] first AT
+- testability
+  - [x] get jest working 
+  - all exports
+    - [ ] should return named constants
+    - [ ] should be functions
+  - [ ] no module load time computation
 
 ## Road Map
 

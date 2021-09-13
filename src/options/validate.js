@@ -1,8 +1,8 @@
-import options from './arguments.js';
+import { getOptions } from './arguments.js';
 import log from 'npmlog';
 
-export default () => {
-  log.verbose('parsed options', options);
+export const validateOptions = () => {
+  log.verbose('parsed options', getOptions());
 
-  log.info('Seed', options.seed);
+  log.info('Seed', getOptions().seed);
 };
