@@ -24,7 +24,9 @@ export const buildBackground = (color) => ({
   },
 });
 
-export const buildSvg = async (inner = () => {}) => {
+export const buildSvg = async (inner = () => {}, options = getOptions()) => {
+  log.silly('plan options', options);
+
   await writeToStream(
     `<svg version="1.1"
           width="${options.width}"
