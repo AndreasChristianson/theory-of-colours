@@ -31,7 +31,7 @@ I don't think the shebang will work on windows
   - [ ] make sure identical seeds yield identical svgs
     - [ ] first AT
 - testability
-  - [x] get jest working 
+  - [x] get jest working
   - all exports
     - [ ] should return named constants
     - [ ] should be functions

@@ -1,98 +1,87 @@
-import Plan from '../Plan.js';
 import log from 'npmlog';
-import elements from 'svg-builder/elements/index.js';
-import { pick } from '../../random/index.js';
-import { getOptions } from '../../options/arguments.js';
 import {
-  getUniformIntGenerator,
   getUniformGenerator,
-  getTruncatedGaussianGenerator,
+  pickColor,
+  pickDistribution,
 } from '../../random/index.js';
-const STD_DEV_DIVIDER = 2;
+import { getOptions } from '../../options/arguments.js';
+import { buildSvg, writeElement } from '../plan-utils.js';
 
-export default class extends Plan {
-  constructor() {
-    super();
-    this.group = log.newGroup('Noise Plan');
-  }
+export default class {
+  //subclasses to make
+  // globular clusters
+  // translucent blobs
 
-  buildDistribution(type, center, min, max) {
-    switch (type) {
-      case 'normal':
-      case 'gaussian':
-        const stdDev = Math.min(max - center, center - min) / STD_DEV_DIVIDER;
-        return getTruncatedGaussianGenerator(center, stdDev, min, max);
-
-      case 'uniform':
-        return getUniformGenerator(min, max);
-    }
-  }
-
-  getPlanDefaults() {
+  getPlanOptions() {
     return {
-      background: 'black',
-      count: getUniformIntGenerator(5000, 10000)(),
-      averageRadius: getUniformGenerator(0.5, 1.2)(),
-      horizontalDistribution: pick(['uniform', 'normal']),
-      verticalDistribution: pick(['uniform', 'normal']),
-      // pallet
+      foregroundColor: {
+        type: 'palette',
+      },
+      backgroundColor: {
+        type: 'near',
+        color: 'black',
+        jitter: 3,
+      },
+      count: 2000,
+      radius: {
+        type: 'normal',
+        min: 1,
+        max: 100,
+        center: 40,
+        stddev: 25,
+      },
+      opacity: {
+        type: 'uniform',
+        min: 0.5,
+        max: 0.8,
+      },
+      ...getOptions(),
     };
+  }
+
+  generateNoise = async () => {
+    const options = this.getPlanOptions();
+    const tracker = log.newItem('noise', options.count);
+
+    const sizeDistribution = pickDistribution(options.radius);
+    const opacityDistribution = pickDistribution(options.opacity);
+    const verticalDistribution = getUniformGenerator(options.height);
+    const horizontalDistribution = getUniformGenerator(options.width);
+    const foregroundColorGenerator = pickColor(options.foregroundColor);
+    await writeElement({
+      tag: 'rect',
+      attributes: {
+        fill: pickColor(options.backgroundColor)(),
+        width: '100%',
+        height: '100%',
+      },
+    });
+
+    const elementCache = [];
+    for (let id = 0; id < options.count; id++) {
+      elementCache.push({
+        tag: 'circle',
+        attributes: {
+          r: sizeDistribution(),
+          cx: verticalDistribution(),
+          cy: horizontalDistribution(),
+          fill: foregroundColorGenerator(),
+          opacity: opacityDistribution(),
+          id,
+        },
+      });
+      tracker.completeWork(1);
+    }
+    for (const element of elementCache) {
+      await writeElement(element);
+    }
+
+    tracker.finish();
   }
 
   async buildSvg() {
-    const planOptions = {
-      ...this.getPlanDefaults(),
-      ...getOptions(),
-    };
-    const tracker = this.group.newItem('buildSvg', planOptions.count);
-    tracker.verbose('derived plan options', planOptions);
-    await this.writeToStream(
-      `<svg version="1.1"
-          width="${planOptions.width}"
-          height="${planOptions.height}"
-          xmlns="http://www.w3.org/2000/svg">`
-    );
+  log.silly('plan options', options);
 
-    await this.addElement(
-      new elements.Rect({
-        fill: planOptions.background,
-        width: '100%',
-        height: '100%',
-      })
-    );
-
-    const sizeDistribution = getTruncatedGaussianGenerator(
-      planOptions.averageRadius,
-      planOptions.averageRadius / STD_DEV_DIVIDER,
-      0
-    );
-
-    const horizontalDistribution = this.buildDistribution(
-      planOptions.horizontalDistribution,
-      planOptions.width / 2,
-      0,
-      planOptions.width
-    );
-    const verticalDistribution = this.buildDistribution(
-      planOptions.verticalDistribution,
-      planOptions.height / 2,
-      0,
-      planOptions.height
-    );
-
-    for (let count = 0; count < planOptions.count; count++) {
-      await this.addElement(
-        new elements.Circle({
-          fill: 'white',
-          r: Math.abs(sizeDistribution()),
-          cx: horizontalDistribution(),
-          cy: verticalDistribution(),
-        })
-      );
-      tracker.completeWork(1);
-    }
-
-    await this.writeToStream('</svg>');
-    tracker.finish();
+    await buildSvg(this.generateNoise);
   }
 }

@@ -1,4 +1,4 @@
-import { getRandom } from './index.js';
+import { getRandom } from '../index.js';
 
 export const getUniformIntGenerator = (min, max) => {
   return getRandom().uniformInt(min, max);

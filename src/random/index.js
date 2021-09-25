@@ -4,16 +4,23 @@ import seedRandom from 'seedrandom';
 import { getOptions } from '../options/arguments.js';
 
 export { pick } from './pick.js';
-export { getUniformGenerator, getUniformIntGenerator } from './uniform.js';
+export {
+  getUniformGenerator,
+  getUniformIntGenerator,
+} from './distributions/uniform.js';
 export {
   getGaussianGenerator,
   getTruncatedGaussianGenerator,
-} from './gaussian.js';
+} from './distributions/gaussian.js';
+export { pickDistribution } from './distributions/pick-distribution.js';
+export { pickColor } from './colors/pick-color.js';
+export { pickPalette } from './colors/palettes.js';
 
 let seededRandom;
 
 export const setupSeed = (seed = getOptions().seed) => {
   seededRandom = random.clone(seedRandom(seed));
+  // seedRandom(seed, { global: true });
 };
 export const getRandom = () => {
   return seededRandom;

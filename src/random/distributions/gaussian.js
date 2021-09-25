@@ -1,4 +1,4 @@
-import { getRandom } from './index.js';
+import { getRandom } from '../index.js';
 
 const STD_DEV_RANGE = 4;
 
