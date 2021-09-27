@@ -1,7 +1,6 @@
 import { setupLogging } from './setup-cli-app.js';
-import { setOptions } from './options/arguments.js';
+import { setOptions, getOptions } from './options/arguments.js';
 import log from 'npmlog';
-import { validateOptions } from './options/validate.js';
 import {
   openFile,
   closeFile,
@@ -15,8 +14,9 @@ export const main = async () => {
     setOptions();
     setupLogging();
 
-    validateOptions();
     setupSeed();
+    log.info('Seed', getOptions().seed);
+    log.verbose('parsed options', getOptions());
 
     await openFile();
 
@@ -25,7 +25,10 @@ export const main = async () => {
     const planInstance = new Plan();
     log.silly('Plan instance created');
 
-    await planInstance.buildSvg();
+    const options = planInstance.addPlanOptions(getOptions());
+    log.silly('Plan instance created', options);
+
+    await planInstance.buildSvg(options);
     log.verbose('SVG generation complete.');
 
     await closeFile();

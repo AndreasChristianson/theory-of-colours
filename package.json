@@ -29,6 +29,7 @@
     "random": "^3.0.6",
     "randomcolor": "^0.6.2",
     "seedrandom": "^3.0.5",
+    "self-referenced-object": "^2.0.0",
     "svg-builder": "^1.0.0",
     "tinycolor2": "^1.4.2",
     "yargs": "^17.1.1"

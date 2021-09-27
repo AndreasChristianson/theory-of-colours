@@ -39,7 +39,7 @@ export const setOptions = () => {
       description: 'The overall plan to use',
       choices: availablePlans,
       defaultDescription: 'chosen randomly',
-      default: () => availablePlans[random.int(0, availablePlans.length - 1)],
+      default: undefined,
     })
     .option('plan-config', {
       alias: 'c',

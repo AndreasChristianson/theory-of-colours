@@ -1,15 +1,13 @@
-import { getOptions } from '../../options/arguments.js';
 import Noise from './Noise.js';
+import { addJitterToColor } from '../../random/colors/pick-color.js';
+import { getUniformIntGenerator } from '../../random/index.js';
+import { generateSvgBuilder } from '../plan-utils.js';
 
-export default class extends Noise {
-  getPlanOptions() {
-    return {
-      ...super.getPlanOptions(),
-      foregroundColor: {
-        type: 'random',
-        luminosity: 'light',
-      },
-      count: 3000,
+class NightSky extends Noise {
+  constructor(options) {
+    super({
+      backgroundColor: addJitterToColor('black').toString(),
+      count: getUniformIntGenerator(2000, 3000)(),
       radius: {
         type: 'normal',
         min: 0,
@@ -22,7 +20,21 @@ export default class extends Noise {
         min: 0.9,
         max: 1.0,
       },
-      ...getOptions(),
-    };
+      ...options,
+    });
   }
+
+  buildSvg = generateSvgBuilder((options) => [
+    {
+      tag: 'rect',
+      attributes: {
+        fill: options.backgroundColor,
+        width: '100%',
+        height: '100%',
+      },
+    },
+    ...this.generateNoise(options),
+  ]);
 }
+
+export default NightSky;

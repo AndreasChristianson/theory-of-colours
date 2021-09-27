@@ -1,59 +1,47 @@
 import log from 'npmlog';
+import { pickRandomPalette } from '../../random/colors/palettes.js';
+import { generateRandomColor } from '../../random/colors/pick-color.js';
 import {
   getUniformGenerator,
-  pickColor,
   pickDistribution,
+  pick,
+  getUniformIntGenerator,
 } from '../../random/index.js';
-import { getOptions } from '../../options/arguments.js';
-import { buildSvg, writeElement } from '../plan-utils.js';
+import { generateSvgBuilder } from '../plan-utils.js';
+import Plan from '../Plan.js';
 
-export default class {
+class Noise extends Plan {
+  constructor(options) {
+    super({
+      foregroundColorPalette: pickRandomPalette(),
+      backgroundColor: generateRandomColor().toString(),
+      count: getUniformIntGenerator(100, 3000)(),
+      radius: {
+        type: 'normal',
+        min: 1,
+        max: 100,
+        center: 40,
+        stddev: 25,
+      },
+      opacity: {
+        type: 'uniform',
+        min: 0.5,
+        max: 0.8,
+      },
+      ...options,
+    });
+  }
   //subclasses to make
   // globular clusters
   // translucent blobs
 
-  getPlanOptions = () => ({
-    foregroundColor: {
-      type: 'palette',
-    },
-    // backgroundColor: {
-    //   type: 'near',
-    //   color: 'black',
-    //   jitter: 3,
-    // },
-    count: 2000,
-    radius: {
-      type: 'normal',
-      min: 1,
-      max: 100,
-      center: 40,
-      stddev: 25,
-    },
-    opacity: {
-      type: 'uniform',
-      min: 0.5,
-      max: 0.8,
-    },
-    ...getOptions(),
-  });
-
-  generateNoise = async () => {
-    const options = this.getPlanOptions();
+  generateNoise = (options) => {
     const tracker = log.newItem('noise', options.count);
 
     const sizeDistribution = pickDistribution(options.radius);
     const opacityDistribution = pickDistribution(options.opacity);
-    const verticalDistribution = getUniformGenerator(options.height);
-    const horizontalDistribution = getUniformGenerator(options.width);
-    const foregroundColorGenerator = pickColor(options.foregroundColor);
-    // await writeElement({
-    //   tag: 'rect',
-    //   attributes: {
-    //     fill: pickColor(options.backgroundColor)(),
-    //     width: '100%',
-    //     height: '100%',
-    //   },
-    // });
+    const verticalDistribution = getUniformGenerator(0, options.height);
+    const horizontalDistribution = getUniformGenerator(0, options.width);
 
     const elementCache = [];
     for (let id = 0; id < options.count; id++) {
@@ -63,19 +51,19 @@ export default class {
           r: sizeDistribution(),
           cx: verticalDistribution(),
           cy: horizontalDistribution(),
-          fill: foregroundColorGenerator(),
+          fill: pick(options.foregroundColorPalette),
           opacity: opacityDistribution(),
           id,
         },
       });
       tracker.completeWork(1);
     }
-    for (const element of elementCache) {
-      await writeElement(element);
-    }
 
     tracker.finish();
+    return elementCache;
   };
 
-  buildSvg = () => buildSvg(this.generateNoise, this.getPlanOptions());
+  buildSvg = generateSvgBuilder(this.generateNoise);
 }
+
+export default Noise;

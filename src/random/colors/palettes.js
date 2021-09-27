@@ -4,11 +4,12 @@ const generatePalettes = () => ({
   fire: ['#801100', '#B62203', '#D73502', '#FC6400', '#FF7500', '#FAC000'],
 });
 
+export const pickRandomPalette = () => pick(nicePalettes);
+
 export const pickPalette = (name) => {
   const selectedPalette = generatePalettes()[name];
   if (selectedPalette) {
-    return () => pick(selectedPalette);
+    return selectedPalette;
   }
-  const randomPalette = pick(nicePalettes);
-  return () => pick(randomPalette);
+  return pickRandomPalette();
 };

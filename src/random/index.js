@@ -13,8 +13,8 @@ export {
   getTruncatedGaussianGenerator,
 } from './distributions/gaussian.js';
 export { pickDistribution } from './distributions/pick-distribution.js';
-export { pickColor } from './colors/pick-color.js';
 export { pickPalette } from './colors/palettes.js';
+export { weightedPick } from './weighted-pick.js';
 
 let seededRandom;
 
