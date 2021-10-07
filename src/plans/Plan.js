@@ -6,6 +6,10 @@ export default class {
 
   addPlanOptions = (options) =>
     resolveReferences({
+      center: {
+        x: '${this.height / 2}',
+        y: '${this.width / 2}',
+      },
       ...this.defaultOptions,
       ...options,
     });

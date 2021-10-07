@@ -3,7 +3,7 @@ import { hideBin } from 'yargs/helpers';
 import random from 'random';
 import plans from '../plans/index.js';
 
-const availablePlans = Object.keys(plans);
+const availablePlans = plans.map((plan) => plan.name.toLowerCase());
 
 let options;
 
@@ -39,7 +39,6 @@ export const setOptions = () => {
       description: 'The overall plan to use',
       choices: availablePlans,
       defaultDescription: 'chosen randomly',
-      default: undefined,
     })
     .option('plan-config', {
       alias: 'c',
