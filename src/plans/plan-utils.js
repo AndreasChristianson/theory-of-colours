@@ -2,7 +2,8 @@ import log from 'npmlog';
 import { writeToStream } from '../files/index.js';
 import pack from '../../package.json';
 
-const isIterable = (value) => typeof value !== "string" && Symbol.iterator in Object(value);
+const isIterable = (value) =>
+  typeof value !== 'string' && Symbol.iterator in Object(value);
 
 const objectToAttributes = (object = {}, separator = ' ') =>
   Object.entries(object)
@@ -10,16 +11,17 @@ const objectToAttributes = (object = {}, separator = ' ') =>
     .map(([key, value]) => `${key}="${value}"`)
     .join(separator);
 
-
 const writeElement = async (element, depth = 0) => {
   if (isIterable(element)) {
-    return Promise.all(element.map(subElement => writeElement(subElement, depth)));
-  } 
+    return Promise.all(
+      element.map((subElement) => writeElement(subElement, depth))
+    );
+  }
   const attributes = objectToAttributes(element.attributes);
-  const closingTag = element.closingTag || `</${element.tag}>`
-  const openingTag = element.openingTag ||`<${element.tag} ${attributes}>`
+  const closingTag = element.closingTag || `</${element.tag}>`;
+  const openingTag = element.openingTag || `<${element.tag} ${attributes}>`;
   if (!element.content) {
-    await writeToStream(`${openingTag.slice(0,-1)}/>`, depth);
+    await writeToStream(`${openingTag.slice(0, -1)}/>`, depth);
   } else if (typeof element.content === 'string') {
     await writeToStream(`${openingTag}${element.content}${closingTag}`, depth);
   } else {
@@ -30,29 +32,29 @@ const writeElement = async (element, depth = 0) => {
 };
 export const generateSvgBuilder =
   (elementGenerator, attributeOverrides = {}) =>
-    async (options) => {
-      const attributes = {
-        width: options.width,
-        height: options.height,
-        version: '1.1',
-        xmlns: 'http://www.w3.org/2000/svg',
-        ...attributeOverrides,
-      };
-      await writeElement({
-        tag: 'svg',
-        attributes,
-        content: [
-          {
-            openingTag: '<!--',
-            closingTag: '-->',
-            content:`\n${pack.description}\n${pack.homepage}\n${pack.version}\n`
-          },
-          {
-            openingTag: '<!--',
-            closingTag: '-->',
-            content: `\nParameters:\n${JSON.stringify(options, null,'  ')}\n`
-          },
-          ...await elementGenerator(options)
-        ]
-      })
+  async (options) => {
+    const attributes = {
+      width: options.width,
+      height: options.height,
+      version: '1.1',
+      xmlns: 'http://www.w3.org/2000/svg',
+      ...attributeOverrides,
     };
+    await writeElement({
+      tag: 'svg',
+      attributes,
+      content: [
+        {
+          openingTag: '<!--',
+          closingTag: '-->',
+          content: `\n${pack.description}\n${pack.homepage}\n${pack.version}\n`,
+        },
+        ...(await elementGenerator(options)),
+        {
+          openingTag: '<!--',
+          closingTag: '-->',
+          content: `\nParameters:\n${JSON.stringify(options, null, '  ')}\n`,
+        },
+      ],
+    });
+  };
