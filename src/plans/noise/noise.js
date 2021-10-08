@@ -25,8 +25,8 @@ class Noise extends Plan {
       },
       opacity: {
         type: 'uniform',
-        min: 0.5,
-        max: 0.8,
+        min: 0.3,
+        max: 1,
       },
       ...options,
     });

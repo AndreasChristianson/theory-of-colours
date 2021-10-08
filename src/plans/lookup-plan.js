@@ -2,18 +2,18 @@ import log from 'npmlog';
 import { getOptions } from '../options/arguments.js';
 import { weightedPick } from '../random/index.js';
 import planObjects from './index.js';
-const extractPlanName = (object) => object.name.toLowerCase();
 
 const findPlanEntry = () =>
   planObjects.filter(
-    (planObject) => extractPlanName(planObject) === extractPlanName(getOptions)
+    (planObject) =>
+      planObject.name.toLowerCase() === getOptions().plan.toLowerCase()
   )[0];
 
 export const lookupPlan = () => {
   const tracker = log.newItem('choosing plan');
   tracker.silly('Choosing plan for', getOptions().plan);
 
-  const planObjectFromInput = findPlanEntry();
+  const planObjectFromInput = getOptions().plan ? findPlanEntry() : undefined;
   const randomIndex = weightedPick(planObjects.map((plan) => plan.weight));
   const randomPlanObject = planObjects[randomIndex];
   const ChosenPlan = planObjectFromInput

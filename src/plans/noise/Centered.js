@@ -48,21 +48,17 @@ class Centered extends Noise {
   constructor(options) {
     super({
       attributeToScale: pick(['opacity', 'r']),
-      scaleDirection: pick([1, -1]),
-      center: {
-        x: '${this.height / 2}',
-        y: '${this.width / 2}',
-      },
+      scaleDirection: 1,
       maxScaleUp: getUniformGenerator(2, 5)(),
       count: getUniformIntGenerator(1000, 2000)(),
       radius: {
         type: 'normal',
         min: 1,
-        max: 100,
+        max: 200,
         center: 40,
-        stddev: 5,
+        stddev: 10,
       },
-      inflectionDistance: getTruncatedGaussianGenerator(400, 25, 100, 1000)(),
+      inflectionDistance: getTruncatedGaussianGenerator(400, 100, 10, 1000)(),
       ...options,
     });
   }
