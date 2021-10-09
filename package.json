@@ -21,6 +21,7 @@
   },
   "type": "module",
   "homepage": "https://github.com/AndreasChristianson/theory-of-colours#readme",
+  "keywords": ["svg", "random", "abstract art"],
   "dependencies": {
     "nice-color-palettes": "^3.0.0",
     "npmlog": "^5.0.1",

@@ -22,13 +22,13 @@ I don't think the shebang will work on windows
 
 ## Todo
 
-- [ ] publish
-  - [ ] auto publish main
+- [x] publish
+  - [x] auto publish main
 - [x] cli args
   - [x] filename to write to
   - [x] open
 - SVG generation
-  - [ ] don't write elements before collecting them
+  - [x] don't write elements before collecting them
 - files
   - [x] don't spew drain listener warnings
 - reproducability
