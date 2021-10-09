@@ -4,6 +4,10 @@ _Si vera nostra sunt aut falsa, erunt talia, licet nostra per vitam defendimus. 
 
 This package generates random SVGs.
 
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/AndreasChristianson/theory-of-colours/main)
+![npm](https://img.shields.io/npm/v/theory-of-colours)
+![npm](https://img.shields.io/npm/dw/theory-of-colours)
+
 ## Installation
 
 `npm install -g theory-of-colours`
