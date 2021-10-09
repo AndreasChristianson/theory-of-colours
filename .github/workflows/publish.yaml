@@ -1,4 +1,4 @@
-name: npm publish
+name: main
 on:
   push:
     branches: [main]
@@ -12,11 +12,15 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
       - run: |
-          git config user.email "github-actions[bot]@users.github.com"
+          git config user.email "github-actions[bot]@example.com"
           git config user.name "github-actions [bot]"
           npm version patch
-      - run: npm git push
+      - run: |
+          git push
+          git push --tags
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
