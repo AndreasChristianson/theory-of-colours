@@ -36,8 +36,6 @@ class Noise extends Plan {
   // translucent blobs
 
   generateNoise = (options) => {
-    const tracker = log.newItem('noise', options.count);
-
     const sizeDistribution = pickDistribution(options.radius);
     const opacityDistribution = pickDistribution(options.opacity);
     const verticalDistribution = getUniformGenerator(0, options.height);
@@ -56,10 +54,8 @@ class Noise extends Plan {
           id,
         },
       });
-      tracker.completeWork(1);
     }
 
-    tracker.finish();
     return elementCache;
   };
 
