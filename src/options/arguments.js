@@ -4,6 +4,7 @@ import random from 'random';
 import plans from '../plans/index.js';
 import pack from '../../package.json';
 import { URL } from 'url';
+import tmp from 'tmp';
 
 const availablePlans = plans.map((plan) => plan.name.toLowerCase());
 const basePath = new URL('../..', import.meta.url).pathname;
@@ -47,18 +48,23 @@ export const setOptions = () => {
     .option('plan-config', {
       alias: 'c',
       type: 'config',
-      description: 'Provide the give json file as options to the plan',
+      description: 'Provide a json file as options to the plan',
     })
     .option('open', {
       alias: 'o',
       type: 'boolean',
+      default: true,
       description: 'Open the svg via `open`',
     })
     .option('output-file', {
       alias: ['file', 'f'],
       type: 'string',
       description: 'The file to write to',
-      default: 'art.svg',
+      default: tmp.tmpNameSync({
+        postfix: 'colours.svg',
+      }),
+      defaultDescription: 'a temp file',
+
     })
     .option('width', {
       type: 'number',
