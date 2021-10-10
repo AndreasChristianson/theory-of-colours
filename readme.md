@@ -2,6 +2,7 @@
 [![npm versions](https://img.shields.io/npm/v/theory-of-colours)](https://www.npmjs.com/package/theory-of-colours?activeTab=versions)
 [![npm downloads](https://img.shields.io/npm/dw/theory-of-colours)](https://www.npmjs.com/package/theory-of-colours)
 [![CodeQL](https://github.com/AndreasChristianson/theory-of-colours/actions/workflows/codeql-analysis.yaml/badge.svg?branch=main&event=push)](https://github.com/AndreasChristianson/theory-of-colours/actions/workflows/codeql-analysis.yaml)
+[![CodeQL](https://github.com/AndreasChristianson/theory-of-colours/actions/workflows/build.yaml/badge.svg?branch=main&event=push)](https://github.com/AndreasChristianson/theory-of-colours/actions/workflows/build.yaml)
 [![publish](https://github.com/AndreasChristianson/theory-of-colours/actions/workflows/publish.yaml/badge.svg)](https://github.com/AndreasChristianson/theory-of-colours/actions/workflows/publish.yaml)
 
 > _Si vera nostra sunt aut falsa, erunt talia, licet nostra per vitam defendimus. Post fata pueri qui nunc ludunt nostri judices erunt._
