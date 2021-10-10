@@ -30,12 +30,14 @@ I don't think the shebang will work on windows
       - [x] default true
   - [x] open
     - [x] default true
+  - [ ] rethink not passing arguments
+  - [ ] two pass argument filling
 - SVG generation
   - [x] don't write elements before collecting them
 - files
   - [x] don't spew drain listener warnings
-- reproducability
-  - [ ] make sure identical seeds yield identical svgs
+- reproducibility
+  - [ ] make sure identical seeds yield identical SVGs
     - [ ] first AT
 - testability
   - [x] get jest working
@@ -43,6 +45,10 @@ I don't think the shebang will work on windows
     - [ ] should return named constants
     - [ ] should be functions
   - [ ] no module load time computation
+- polish
+  - [ ] stop using log trackers
+  - [ ] stop using classes
+
 
 ## Road Map
 
