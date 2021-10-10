@@ -6,15 +6,22 @@
   "bin": {
     "colours": "./bin/index.js"
   },
-  "man": [
-    "./man/colours.1"
-  ],
   "os": [
     "darwin",
     "linux"
   ],
   "engines": {
     "node": ">=12"
+  },
+  "files": [
+    "bin",
+    "src",
+    "man"
+  ],
+    "directories": {
+    "bin": "./bin",
+    "src": "./src",
+    "man": "./man"
   },
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
