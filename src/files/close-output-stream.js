@@ -1,18 +1,16 @@
 import log from 'npmlog';
 import { getWriteStream } from './index.js';
 
-export const closeFile = async () =>
+export const closeOutputStream = async () =>
   new Promise((resolve, reject) => {
-    const tracker = log.newItem('closing file');
 
     getWriteStream().once('error', reject);
 
     getWriteStream().once('close', () => {
-      tracker.silly('File write stream closed');
-      tracker.finish();
+      log.silly('File write stream closed');
       resolve();
     });
 
-    tracker.silly('Closing file write stream');
+    log.silly('Closing file write stream');
     getWriteStream().end();
   });

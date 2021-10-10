@@ -2,9 +2,9 @@ import { setupLogging } from './setup-cli-app.js';
 import { setOptions, getOptions } from './options/arguments.js';
 import log from 'npmlog';
 import {
-  openFile,
-  closeFile,
-  conditionallyOpenOutputFile,
+  openOutputFile,
+  closeOutputStream,
+  conditionallyViewOutputFile,
 } from './files/index.js';
 import { lookupPlan } from './plans/lookup-plan.js';
 import { setupSeed } from './random/index.js';
@@ -18,7 +18,7 @@ export const main = async () => {
     log.info('Seed', getOptions().seed);
     log.verbose('parsed options', getOptions());
 
-    await openFile();
+    await openOutputFile();
 
     const Plan = await lookupPlan();
 
@@ -31,10 +31,10 @@ export const main = async () => {
     await planInstance.buildSvg(options);
     log.verbose('SVG generation complete.');
 
-    await closeFile();
+    await closeOutputStream();
     log.verbose('SVG written to disk.');
 
-    await conditionallyOpenOutputFile();
+    await conditionallyViewOutputFile();
   } catch (e) {
     log.error('Error caught', e);
   }
