@@ -1,5 +1,5 @@
 import yargs from 'yargs';
-import { hideBin } from 'yargs/helpers';
+import  * as helpers  from 'yargs/helpers';
 import random from 'random';
 import plans from '../plans/index.js';
 import pack from '../../package.json';
@@ -11,7 +11,7 @@ const basePath = new URL('../..', import.meta.url).pathname;
 let options;
 
 export const setOptions = () => {
-  options = yargs(hideBin(process.argv))
+  options = yargs(helpers.hideBin(process.argv))
     .epilogue(
       '🎨 https://github.com/AndreasChristianson/theory-of-colours#readme'
     )

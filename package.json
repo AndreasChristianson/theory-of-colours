@@ -17,7 +17,7 @@
     "node": ">=12"
   },
   "scripts": {
-    "test": "jest",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "prettier": "prettier --write .",
     "prepack": "npm run man",
     "man": "cd man && marked-man --manual 'Colours Help' --section 1 man.md > colours.1"
