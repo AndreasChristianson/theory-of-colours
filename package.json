@@ -19,7 +19,7 @@
   "scripts": {
     "test": "jest",
     "prettier": "prettier --write .",
-    "prepublish": "npm run man",
+    "prepack": "npm run man",
     "man": "cd man && marked-man --manual 'Colours Help' --section 1 man.md > colours.1"
   },
   "repository": {
@@ -40,6 +40,7 @@
     "art"
   ],
   "dependencies": {
+    "marked-man": "^0.7.0",
     "nice-color-palettes": "^3.0.0",
     "npmlog": "^5.0.1",
     "open": "^8.3.0",
@@ -56,7 +57,6 @@
     "@babel/preset-env": "^7.15.8",
     "babel-jest": "^27.2.5",
     "jest": "^27.2.5",
-    "marked-man": "^0.7.0",
     "prettier": "^2.4.1"
   }
 }
