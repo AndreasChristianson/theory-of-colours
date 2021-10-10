@@ -1,7 +1,11 @@
 name: main
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
+    inputs:
+      type:
+        description: 'The version to bump to. Either a semver string, patch, minor, major, prepatch, preminor, premajor, prerelease, or from-git'
+        required: true
+        default: 'patch'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,7 +21,7 @@ jobs:
       - run: |
           git config user.email "github-actions[bot]@example.com"
           git config user.name "github-actions [bot]"
-          npm version patch
+          npm version ${{ github.event.inputs.type }}
       - run: |
           git push
           git push --tags
