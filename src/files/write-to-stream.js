@@ -1,10 +1,12 @@
 import log from 'npmlog';
 import { getWriteStream } from './index.js';
 
-export const writeToStream = async (string, depth = 0) =>
+const generateIndent = (indentLevel, indentString) => indentString.repeat(indentLevel);
+
+export const writeToStream = async (stringToWrite, indentLevel = 0, indentString = '  ', suffix = '\n') =>
   new Promise((resolve) => {
-    const indent = '  '.repeat(depth);
-    if (getWriteStream().write(`${indent}${string}\n`)) {
+    const indent = generateIndent(indentLevel, indentString)
+    if (getWriteStream().write(`${indent}${stringToWrite}${suffix}`)) {
       resolve();
     } else {
       log.silly('fs buffer full. Pausing for drain event.');

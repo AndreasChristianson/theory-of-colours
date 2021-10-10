@@ -1,6 +1,6 @@
-export { conditionallyOpenOutputFile } from './conditionally-open-file.js';
-export { closeFile } from './close-file.js';
-export { openFile } from './open-file.js';
+export { conditionallyViewOutputFile } from './conditionally-view-output-file.js';
+export { closeOutputStream } from './close-output-stream.js';
+export { openOutputFile } from './open-output-file.js';
 export { writeToStream } from './write-to-stream.js';
 
 let _writeStream;
