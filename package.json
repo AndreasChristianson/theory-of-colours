@@ -6,6 +6,9 @@
   "bin": {
     "colours": "./bin/index.js"
   },
+  "man": [
+    "./man/theory-of-colours.1"
+  ],
   "os": [
     "darwin",
     "linux"
@@ -18,16 +21,11 @@
     "src",
     "man"
   ],
-    "directories": {
-    "bin": "./bin",
-    "src": "./src",
-    "man": "./man"
-  },
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "prettier": "prettier --write .",
     "prepack": "npm run man",
-    "man": "cd man && marked-man --manual 'Colours Help' --section 1 man.md > colours.1"
+    "man": "cd man && marked-man --manual 'Colours Help' --section 1 man.md > theory-of-colours.1"
   },
   "repository": {
     "type": "git",
