@@ -1,20 +1,32 @@
 {
   "name": "theory-of-colours",
   "version": "1.0.3",
-  "description": "Generate random, pleasing, compositions.",
+  "description": "Generate random, pleasing, compositions from the command line.",
   "main": "./bin/index.js",
   "bin": {
     "colours": "./bin/index.js"
   },
+  "man": [
+    "./man/colours.1"
+  ],
+  "os": [
+    "darwin",
+    "linux"
+  ],
+  "engines": {
+    "node": ">=12"
+  },
   "scripts": {
     "test": "jest",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "prepack": "npm run man",
+    "man": "cd man && marked-man --manual 'Colours Help' --section 1 man.md > colours.1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AndreasChristianson/theory-of-colours.git"
   },
-  "author": "",
+  "author": "Andreas Christianson <github-spam@pessimistic-it.com> (http://pessimistic-it.com/)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/AndreasChristianson/theory-of-colours/issues"
@@ -24,9 +36,11 @@
   "keywords": [
     "svg",
     "random",
-    "abstract art"
+    "abstract art",
+    "art"
   ],
   "dependencies": {
+    "marked-man": "^0.7.0",
     "nice-color-palettes": "^3.0.0",
     "npmlog": "^5.0.1",
     "open": "^8.3.0",
