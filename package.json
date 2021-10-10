@@ -1,6 +1,6 @@
 {
   "name": "theory-of-colours",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Generate random, pleasing, compositions from the command line.",
   "main": "./bin/index.js",
   "bin": {
