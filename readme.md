@@ -1,17 +1,12 @@
 # Theory of Colours
+[![npm versions](https://img.shields.io/npm/v/theory-of-colours)](https://www.npmjs.com/package/theory-of-colours?activeTab=versions)
+[![npm downloads](https://img.shields.io/npm/dw/theory-of-colours)](https://www.npmjs.com/package/theory-of-colours)
+[![CodeQL](https://github.com/AndreasChristianson/theory-of-colours/actions/workflows/codeql-analysis.yaml/badge.svg)](https://github.com/AndreasChristianson/theory-of-colours/actions/workflows/codeql-analysis.yaml)
+[![main](https://github.com/AndreasChristianson/theory-of-colours/actions/workflows/publish.yaml/badge.svg)](https://github.com/AndreasChristianson/theory-of-colours/actions/workflows/publish.yaml)
 
-_Si vera nostra sunt aut falsa, erunt talia, licet nostra per vitam defendimus. Post fata pueri qui nunc ludunt nostri judices erunt._
+> _Si vera nostra sunt aut falsa, erunt talia, licet nostra per vitam defendimus. Post fata pueri qui nunc ludunt nostri judices erunt._
 
 This package is a cli tool that generates random, pleasing, SVGs.
-
-<p>
-    <a href="https://github.com/AndreasChristianson/theory-of-colours/actions/workflows/publish.yaml" alt="Build">
-        <img src="https://img.shields.io/github/workflow/status/AndreasChristianson/theory-of-colours/main" /></a>
-            <a href="https://www.npmjs.com/package/theory-of-colours" alt="npm downloads">
-        <img src="https://img.shields.io/npm/dw/theory-of-colours" /></a>
-    <a href="https://www.npmjs.com/package/theory-of-colours?activeTab=versions" alt="npm versions">
-        <img src="https://img.shields.io/npm/v/theory-of-colours" /></a>
-</p>
 
 ## Installation
 
