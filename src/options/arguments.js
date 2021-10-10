@@ -2,8 +2,11 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import random from 'random';
 import plans from '../plans/index.js';
+import pack from '../../package.json';
+import { URL } from 'url';
 
 const availablePlans = plans.map((plan) => plan.name.toLowerCase());
+const basePath = new URL('../..', import.meta.url).pathname;
 
 let options;
 
@@ -26,6 +29,7 @@ export const setOptions = () => {
       type: 'count',
       description: 'Run with verbose logging. try -vv for more verbose',
     })
+    .version('version', `${pack.version} -- ${basePath}`)
     .option('seed', {
       alias: 's',
       type: 'number',
