@@ -10,8 +10,7 @@ const findPlanEntry = () =>
   )[0];
 
 export const lookupPlan = () => {
-  const tracker = log.newItem('choosing plan');
-  tracker.silly('Choosing plan for', getOptions().plan);
+  log.silly('Choosing plan for', getOptions().plan);
 
   const planObjectFromInput = getOptions().plan ? findPlanEntry() : undefined;
   const randomIndex = weightedPick(planObjects.map((plan) => plan.weight));
@@ -20,7 +19,7 @@ export const lookupPlan = () => {
     ? planObjectFromInput.class
     : randomPlanObject.class;
 
-  tracker.info('Plan', ChosenPlan.name);
+  log.info('Plan', ChosenPlan.name);
 
   return ChosenPlan;
 };
