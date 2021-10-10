@@ -26,10 +26,10 @@ I don't think the shebang will work on windows
   - [x] auto publish main
 - [x] cli args
   - [x] filename to write to
-    - [ ] add option to use a temp file
-      - [ ] default true
+    - [x] add option to use a temp file
+      - [x] default true
   - [x] open
-    - [ ] default true
+    - [x] default true
 - SVG generation
   - [x] don't write elements before collecting them
 - files
